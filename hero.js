@@ -56,32 +56,35 @@
         try {
             const [movies, shows] = await Promise.all([
                 ApiClient.getItems(userId, {
-                    SortBy: 'DateCreated,SortName',
+                    SortBy: 'DateCreated',
                     SortOrder: 'Descending',
                     IncludeItemTypes: 'Movie',
                     Recursive: true,
-                    Fields: 'Overview,Genres,OfficialRating,ProductionYear,RunTimeTicks',
+                    Fields: 'Overview,Genres,OfficialRating,ProductionYear,RunTimeTicks,DateCreated',
                     ImageTypeLimit: 1,
                     EnableImageTypes: 'Backdrop',
-                    Limit: CONFIG.maxItems
+                    Limit: 10
                 }),
                 ApiClient.getItems(userId, {
-                    SortBy: 'DateCreated,SortName',
+                    SortBy: 'DateCreated',
                     SortOrder: 'Descending',
                     IncludeItemTypes: 'Series',
                     Recursive: true,
-                    Fields: 'Overview,Genres,OfficialRating,ProductionYear',
+                    Fields: 'Overview,Genres,OfficialRating,ProductionYear,DateCreated',
                     ImageTypeLimit: 1,
                     EnableImageTypes: 'Backdrop',
-                    Limit: CONFIG.maxItems
+                    Limit: 10
                 })
             ]);
 
+            // Combina, filtra por backdrop, ordena por data e pega os mais recentes
             const allItems = [...(movies.Items || []), ...(shows.Items || [])]
                 .filter(item => item.BackdropImageTags && item.BackdropImageTags.length > 0)
+                .sort((a, b) => new Date(b.DateCreated) - new Date(a.DateCreated))
                 .slice(0, CONFIG.maxItems);
 
             cachedItems = allItems;
+            console.log('Hero: Itens carregados:', allItems.map(i => i.Name));
             return allItems;
         } catch (error) {
             console.error('Hero: Erro ao buscar itens:', error);
