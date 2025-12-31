@@ -1,0 +1,153 @@
+/* ===== CARDS - HOVER SUAVE + RESPONSIVO ===== */
+
+/* Container com espaço para expansão */
+.itemsContainer {
+    padding: 10px 0 30px 0 !important;
+}
+
+/* Card base */
+.card {
+    transition: transform 0.2s ease, z-index 0s !important;
+    transform-origin: center center;
+}
+
+.cardBox {
+    transition: box-shadow 0.2s ease !important;
+    border-radius: 4px;
+}
+
+.cardImageContainer {
+    transition: filter 0.2s ease !important;
+    border-radius: 4px;
+}
+
+/* Barra de progresso vermelha estilo Netflix */
+.itemProgressBar {
+    background-color: #e50914 !important;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 1025px) and (hover: hover) {
+    .card:hover {
+        transform: scale(1.08) !important;
+        z-index: 10 !important;
+    }
+
+    .card:hover .cardBox {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.6) !important;
+    }
+
+    .card:hover .cardImageContainer {
+        filter: brightness(0.9);
+    }
+}
+
+/* ===== TABLET ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card:active {
+        transform: scale(1.05) !important;
+    }
+
+    .cardBox {
+        border-radius: 6px;
+    }
+
+    /* Cards maiores no tablet */
+    .card {
+        min-width: 160px !important;
+    }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+    /* Sem efeito de hover em mobile */
+    .card:hover {
+        transform: none !important;
+    }
+
+    /* Feedback visual ao tocar */
+    .card:active {
+        transform: scale(0.98) !important;
+        opacity: 0.9;
+    }
+
+    .itemsContainer {
+        padding: 5px 0 15px 0 !important;
+    }
+
+    /* Cards menores */
+    .cardBox {
+        border-radius: 4px;
+    }
+
+    /* Texto menor */
+    .cardText {
+        font-size: 0.85rem !important;
+    }
+
+    /* Header menor */
+    .sectionTitle {
+        font-size: 1.1rem !important;
+        padding: 0 10px !important;
+    }
+
+    /* Scroll horizontal mais suave */
+    .emby-scroller {
+        scroll-snap-type: x mandatory;
+    }
+
+    .card {
+        scroll-snap-align: start;
+    }
+}
+
+/* ===== TV / TELAS GRANDES ===== */
+@media (min-width: 1920px) {
+    .card:hover {
+        transform: scale(1.1) !important;
+    }
+
+    .cardText {
+        font-size: 1.1rem !important;
+    }
+
+    .sectionTitle {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* ===== TV - LAYOUT JELLYFIN ===== */
+.layout-tv .card {
+    transition: transform 0.15s ease !important;
+}
+
+.layout-tv .card:focus,
+.layout-tv .card.focused {
+    transform: scale(1.12) !important;
+    z-index: 20 !important;
+}
+
+.layout-tv .card:focus .cardBox,
+.layout-tv .card.focused .cardBox {
+    box-shadow: 0 0 0 4px #00a4dc, 0 10px 30px rgba(0,0,0,0.7) !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.2rem !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 1.8rem !important;
+}
+
+/* ===== PREFERÊNCIA DE MOVIMENTO REDUZIDO ===== */
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none !important;
+    }
+
+    .card:hover,
+    .card:focus {
+        transform: none !important;
+    }
+}

@@ -1,0 +1,456 @@
+/* ===== NETFLIX HERO BANNER ===== */
+
+/* ===== ANIMAÇÕES ===== */
+
+/* Ken Burns - Zoom lento no backdrop */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+/* Fade in de baixo para cima */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade in da esquerda */
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade in simples */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Pulse suave nos indicadores */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ===== CONTAINER DO HERO ===== */
+
+#custom-hero {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 500px;
+    overflow: hidden;
+    margin-bottom: -100px;
+    z-index: 1;
+}
+
+/* ===== BACKDROP COM KEN BURNS ===== */
+
+#custom-hero .hero-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    transition: opacity 1s ease-in-out;
+    /* Ken Burns Effect */
+    animation: kenBurns 12s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+/* Pausa animação quando troca de slide */
+#custom-hero .hero-backdrop.transitioning {
+    animation-play-state: paused;
+}
+
+/* ===== GRADIENTE ===== */
+
+#custom-hero .hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        rgba(0,0,0,0.9) 0%,
+        rgba(0,0,0,0.6) 30%,
+        transparent 60%),
+    linear-gradient(180deg,
+        transparent 0%,
+        transparent 60%,
+        rgba(20,20,20,0.8) 80%,
+        #141414 100%);
+    pointer-events: none;
+}
+
+/* ===== CONTEÚDO COM ANIMAÇÕES ===== */
+
+#custom-hero .hero-content {
+    position: absolute;
+    bottom: 25%;
+    left: 4%;
+    max-width: 500px;
+    z-index: 10;
+    color: white;
+}
+
+/* Título com animação */
+#custom-hero .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    line-height: 1.1;
+    /* Animação */
+    opacity: 0;
+    animation: fadeInLeft 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* Metadados com animação */
+#custom-hero .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #aaa;
+    /* Animação */
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+#custom-hero .hero-year {
+    color: #46d369;
+    font-weight: 600;
+}
+
+#custom-hero .hero-rating {
+    padding: 2px 8px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-size: 0.85rem;
+}
+
+/* Descrição com animação */
+#custom-hero .hero-description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: #e5e5e5;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* Animação */
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 0.7s;
+}
+
+/* Botões com animação */
+#custom-hero .hero-buttons {
+    display: flex;
+    gap: 15px;
+    /* Animação */
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 0.9s;
+}
+
+#custom-hero .hero-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+#custom-hero .hero-btn:hover {
+    transform: scale(1.05);
+}
+
+#custom-hero .hero-btn-play {
+    background: white;
+    color: #141414;
+}
+
+#custom-hero .hero-btn-play:hover {
+    background: rgba(255,255,255,0.85);
+}
+
+#custom-hero .hero-btn-info {
+    background: rgba(109,109,110,0.7);
+    color: white;
+}
+
+#custom-hero .hero-btn-info:hover {
+    background: rgba(109,109,110,0.5);
+}
+
+/* Ícones dos botões */
+#custom-hero .hero-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* ===== INDICADORES ===== */
+
+#custom-hero .hero-indicators {
+    position: absolute;
+    bottom: 15%;
+    right: 4%;
+    display: flex;
+    gap: 8px;
+    /* Animação */
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+    animation-delay: 1.1s;
+}
+
+#custom-hero .hero-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#custom-hero .hero-indicator:hover {
+    background: rgba(255,255,255,0.6);
+}
+
+#custom-hero .hero-indicator.active {
+    background: white;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== BARRA DE PROGRESSO DO SLIDE ===== */
+
+#custom-hero .hero-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(229, 9, 20, 0.9);
+    width: 0%;
+    transition: width 0.1s linear;
+    z-index: 20;
+}
+
+/* ===== CONTEÚDO ABAIXO DO HERO ===== */
+
+.homeSectionsContainer {
+    position: relative;
+    z-index: 2;
+    background: #141414;
+    padding-top: 20px !important;
+}
+
+/* ===== DESKTOP GRANDE / TV ===== */
+
+@media (min-width: 1920px) {
+    #custom-hero {
+        height: 80vh;
+        min-height: 700px;
+    }
+    #custom-hero .hero-title {
+        font-size: 4.5rem;
+    }
+    #custom-hero .hero-content {
+        max-width: 650px;
+        left: 5%;
+    }
+    #custom-hero .hero-description {
+        font-size: 1.3rem;
+    }
+    #custom-hero .hero-btn {
+        padding: 16px 36px;
+        font-size: 1.3rem;
+    }
+    #custom-hero .hero-btn svg {
+        width: 28px;
+        height: 28px;
+    }
+    #custom-hero .hero-indicator {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ===== TV LAYOUT (JELLYFIN) ===== */
+
+.layout-tv #custom-hero {
+    height: 85vh;
+}
+
+.layout-tv #custom-hero .hero-title {
+    font-size: 4rem;
+}
+
+.layout-tv #custom-hero .hero-btn {
+    padding: 18px 40px;
+    font-size: 1.4rem;
+}
+
+.layout-tv #custom-hero .hero-btn:focus {
+    outline: 4px solid #00a4dc;
+    outline-offset: 4px;
+    transform: scale(1.08);
+}
+
+.layout-tv #custom-hero .hero-indicator {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== TABLET ===== */
+
+@media (max-width: 1200px) {
+    #custom-hero .hero-title {
+        font-size: 2.5rem;
+    }
+    #custom-hero .hero-content {
+        max-width: 400px;
+    }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+    #custom-hero {
+        height: 55vh;
+        min-height: 350px;
+        margin-bottom: -60px;
+    }
+    #custom-hero .hero-title {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+    #custom-hero .hero-content {
+        max-width: 85%;
+        left: 4%;
+        bottom: 18%;
+    }
+    #custom-hero .hero-meta {
+        gap: 10px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+    #custom-hero .hero-description {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+        margin-bottom: 15px;
+    }
+    #custom-hero .hero-buttons {
+        gap: 10px;
+    }
+    #custom-hero .hero-btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+    #custom-hero .hero-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    #custom-hero .hero-indicators {
+        bottom: 10%;
+        right: 4%;
+    }
+    #custom-hero .hero-indicator {
+        width: 8px;
+        height: 8px;
+    }
+    /* Desativa Ken Burns em mobile (performance) */
+    #custom-hero .hero-backdrop {
+        animation: none;
+    }
+    /* Gradiente mais forte em mobile */
+    #custom-hero .hero-gradient {
+        background: linear-gradient(90deg,
+            rgba(0,0,0,0.95) 0%,
+            rgba(0,0,0,0.7) 40%,
+            transparent 70%),
+        linear-gradient(180deg,
+            transparent 0%,
+            transparent 50%,
+            rgba(20,20,20,0.9) 75%,
+            #141414 100%);
+    }
+}
+
+/* ===== MOBILE PEQUENO ===== */
+
+@media (max-width: 480px) {
+    #custom-hero {
+        height: 50vh;
+        min-height: 300px;
+    }
+    #custom-hero .hero-title {
+        font-size: 1.4rem;
+    }
+    #custom-hero .hero-description {
+        display: none;
+    }
+    #custom-hero .hero-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+    #custom-hero .hero-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ===== PREFERÊNCIA DE MOVIMENTO REDUZIDO ===== */
+
+@media (prefers-reduced-motion: reduce) {
+    #custom-hero .hero-backdrop {
+        animation: none;
+    }
+    #custom-hero .hero-title,
+    #custom-hero .hero-meta,
+    #custom-hero .hero-description,
+    #custom-hero .hero-buttons,
+    #custom-hero .hero-indicators {
+        animation: none;
+        opacity: 1;
+    }
+}
