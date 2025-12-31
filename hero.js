@@ -333,22 +333,40 @@
     }
 
     function observePageChanges() {
+        // Observa hashchange
         window.addEventListener('hashchange', () => {
-            setTimeout(() => {
-                if (isHomePage()) {
-                    const heroExists = document.getElementById('custom-hero');
-                    if (!heroExists) {
-                        // Hero foi removido, reinicializa (mantém cache)
-                        isInitialized = false;
-                        initHero();
-                    } else {
-                        toggleHeroVisibility();
-                    }
-                } else {
-                    toggleHeroVisibility();
-                }
-            }, 300);
+            setTimeout(checkAndInitHero, 300);
         });
+
+        // Observa mudanças no DOM (SPA navigation)
+        const observer = new MutationObserver(() => {
+            if (isHomePage() && !document.getElementById('custom-hero')) {
+                const container = document.querySelector('.homeSectionsContainer');
+                if (container) {
+                    isInitialized = false;
+                    initHero();
+                }
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    function checkAndInitHero() {
+        if (isHomePage()) {
+            const heroExists = document.getElementById('custom-hero');
+            if (!heroExists) {
+                isInitialized = false;
+                initHero();
+            } else {
+                toggleHeroVisibility();
+            }
+        } else {
+            toggleHeroVisibility();
+        }
     }
 
     if (document.readyState === 'loading') {
@@ -360,5 +378,16 @@
         observePageChanges();
         initHero();
     }
+
+    // Verifica periodicamente se hero sumiu (fallback)
+    setInterval(() => {
+        if (isHomePage() && !document.getElementById('custom-hero')) {
+            const container = document.querySelector('.homeSectionsContainer');
+            if (container) {
+                isInitialized = false;
+                initHero();
+            }
+        }
+    }, 2000);
 
 })();
