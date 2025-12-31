@@ -344,6 +344,7 @@
                 const container = document.querySelector('.homeSectionsContainer');
                 if (container) {
                     isInitialized = false;
+                    cachedItems = null;
                     initHero();
                 }
             }
@@ -360,6 +361,7 @@
             const heroExists = document.getElementById('custom-hero');
             if (!heroExists) {
                 isInitialized = false;
+                cachedItems = null; // Limpa cache
                 initHero();
             } else {
                 toggleHeroVisibility();
@@ -385,6 +387,7 @@
             const container = document.querySelector('.homeSectionsContainer');
             if (container) {
                 isInitialized = false;
+                cachedItems = null;
                 initHero();
             }
         }
